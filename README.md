@@ -1,6 +1,6 @@
-# vue-daisyui-belajar
+# Larona Editor
 
-This template should help get you started developing with Vue 3 in Vite.
+Simple photo editor using fabricjs, vuejs, vite, daisyui, tailwind
 
 ## Recommended IDE Setup
 
