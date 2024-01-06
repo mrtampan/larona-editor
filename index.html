@@ -1,166 +1,18 @@
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Belajar Fabric JS</title>
-<!-- <script
-  src="https://code.jquery.com/jquery-3.5.1.slim.js"
-  integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
-  crossorigin="anonymous"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.1.0/fabric.min.js"></script>
-</head>
-
-<body>
-    <style>
-.canvas-container { 
-    display: block;
-    margin-left: 280px;
-    margin-top: 0;
-    margin-bottom: 0;              
-    }
- .inputan {
-    padding-top: 10px;
-    padding-bottom: 10px;
- }
- .form-inputan {
-    position: absolute;
-    z-index: 999999;
-    background-color: black;
-    height: auto;
-    color: white;
- }
-        </style>
-<div >
-    <div class="form-inputan">
-        <div class="inputan">
-            <label>Filter Warna: </label>
-            <select onchange="filterFunc(this)">
-                <option>Select Filter</option>
-                <option value="gray">Gray</option>
-                <option value="sepia">Sepia</option>
-            </select>
-        </div>
-        <div class="inputan">
-        <label>Tambah Text: </label>
-        <input type="text" placeholder="isi sesuka hati"/ id="newText" >
-        </div>
-        <div class="inputan">
-            <label>Brush: </label>
-            <input type="color" id="brushColor" />
-            <button id="brushId" onclick="brushFunc()">Aktifkan</button>
-        </div>
-        <div class="inputan">
-            <label>Download: </label>
-            <button onclick="downloadFunc('jpeg')">JPG</button>
-            <button onclick="downloadFunc('png')">PNG</button>
-        </div>
-    </div>
-<canvas id="c" width="300" height="200">Tidak Ada Gambar</canvas>
-
-</div>
-
-<script>
-// create a wrapper around native canvas element (with id="c")
-var canvas = new fabric.Canvas('c');
-var ctx = canvas.getContext('2d');
-canvas.setHeight(600);
-canvas.setWidth(900);
-
-fabric.Image.fromURL('lisa.jpeg', function(img){
-   canvas.add(img); 
-});
-
-
-function filterFunc(selectFilter){
-    let obj = canvas.getObjects();
-    console.log(canvas.getActiveObject());
-    if(canvas.getActiveObject() == undefined || canvas.getActiveObject() === null){
-        alert('selected gambar dulu');
-    }else{
-        if(selectFilter.value === 'gray'){
-        canvas.remove(canvas.getActiveObject());
-        fabric.Image.fromURL('lisa.jpeg', function(img){
-            img.filters.push(new fabric.Image.filters.Grayscale());
-
-            img.applyFilters();
-            canvas.add(img);
-        }, {crossOrigin: 'anonymous'});
-        }else if(selectFilter.value === 'sepia'){
-            canvas.remove(canvas.getActiveObject());
-            fabric.Image.fromURL('lisa.jpeg', function(img){
-                img.filters.push(new fabric.Image.filters.Sepia());
-                img.applyFilters();
-                canvas.add(img);
-            }, {crossOrigin: 'anonymous'});
-            
-        }
-    }
-}
-
-var input = document.getElementById("newText");
-
-// Execute a function when the user releases a key on the keyboard
-input.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
-  if (event.keyCode === 13) {
-    // Cancel the default action, if needed
-    event.preventDefault();
-    // Trigger the button element with a click
-    
-    var teksnya = new fabric.Text( input.value , {
-        fontSize: 20
-    });
-    canvas.add(teksnya);
-  }
-});
-
-var statusBrush = false;
-let brushId = document.querySelector('#brushId');
-let brushColor = document.getElementById("brushColor").value;
-function brushFunc(){
-    console.log(canvas.getActiveObject());
-    if(statusBrush === false){
-        statusBrush = true;
-        canvas.isDrawingMode= 1;
-        canvas.freeDrawingBrush.color = brushColor;
-        canvas.freeDrawingBrush.width = 10;
-        canvas.renderAll();
-        brushId.innerText = 'Matikan';
-    }else{
-        statusBrush = false;
-        brushId.innerText = 'Aktifkan';
-        canvas.isDrawingMode= 0;
-    }
-}
-
-function downloadFunc(extension){
-    let link = document.createElement('a');
-    link.download = `dunlud.${extension}`;
-    link.href = canvas.toDataURL(`image/${extension}`);
-    link.target = '_blank';
-    link.click();
-}
-
-
-// var imgElement = document.getElementById('my-image');
-
-// var imgInstance = new fabric.Image(imgElement, {
-//   top: 100,
-//   left: 200,
-//   opacity: 0.85,
-// });
-
-// create a rectangle object
-// var rect = new fabric.Rect({
-//   left: 100,
-//   top: 100,
-//   fill: 'red',
-//   width: 20,
-//   height: 20
-// });
-
-// "add" rectangle onto canvas
-// canvas.add(imgInstance);
-</script>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link
+      href="http://fonts.googleapis.com/css?family=Oswald|Lobster|Fontdiner+Swanky|Crafty+Girls|Pacifico|Satisfy|Bangers|Audiowide|Sacramento"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
