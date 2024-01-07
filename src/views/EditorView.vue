@@ -15,7 +15,8 @@ const textObj = ref({});
 onMounted(() => {
   brushObj.value.active = false;
 
-  let data = '../src/assets/images/' + route.params.id + '.jpg';
+  let data = new URL(`../assets/images/${route.params.id}`, import.meta.url)
+    .href;
   canvas.value = new fabric.Canvas('canvas', {
     backgroundImage: data,
     isDrawingMode: false,
@@ -74,15 +75,17 @@ function addText() {
   let fabricText = new fabric.Text(text, {
     fill: textObj.value.color ?? 'black',
     fontFamily: textObj.value.font ?? 'Calibri',
-    fontSize: textObj.value.sizing ?? 40,
+    fontSize: textObj.value.sizing ?? 60,
     stroke: textObj.value.stroke ?? 'black',
     strokeWidth: textObj.value.strokeWidth ?? 1,
+    fontWeight: textObj.value.bold ?? 'normal',
   });
 
   canvas.value.add(fabricText);
   canvas.value.renderAll();
 
   textMode.value = false;
+  textObj.value.active = false;
 }
 
 function download() {
@@ -187,12 +190,13 @@ function download() {
           </div>
           <div class="flex flex-col">
             <label>Sizing</label>
-            <input type="number" v-model="textObj.sizing" placeholder="10" />
+            <input type="number" v-model="textObj.sizing" placeholder="60" />
           </div>
           <div class="flex flex-col">
             <label>Font Family</label>
             <select v-model="textObj.font" class="">
               <option disabled selected>Pick your font family</option>
+              <option value="Arial">Arial</option>
               <option value="Times New Roman">Times New Roman</option>
               <option value="Calibri">Calibri</option>
               <option value="Pacifico">Pacifico</option>
@@ -212,6 +216,14 @@ function download() {
               v-model="textObj.strokeWidth"
               placeholder="2"
             />
+          </div>
+          <div class="flex flex-col">
+            <label>Bold</label>
+            <select v-model="textObj.bold" class="">
+              <option disabled selected>normal</option>
+              <option value="normal">normal</option>
+              <option value="bold">bold</option>
+            </select>
           </div>
         </div>
       </template>

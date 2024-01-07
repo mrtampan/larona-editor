@@ -1,27 +1,18 @@
 <script setup>
 const data = [
   {
-    name: 'Lisa',
-    desc: 'Member Blackpink',
-    image: 'lisa',
+    name: 'Spongebob 1',
+    desc: 'Spongebob template',
+    imageName: 'spongebob1.png',
+    image: new URL('../assets/images/spongebob1.png', import.meta.url).href,
   },
   {
-    name: 'Jiso',
-    desc: 'Member Blackpink',
-    image: 'jiso',
-  },
-  {
-    name: 'Rose',
-    desc: 'Member Blackpink',
-    image: 'rose',
-  },
-  {
-    name: 'Jennie',
-    desc: 'Member Blackpink',
-    image: 'jennie',
+    name: 'Sonic 1',
+    desc: 'Sonic template',
+    imageName: 'sonic1.jpg',
+    image: new URL('../assets/images/sonic1.jpg', import.meta.url).href,
   },
 ];
-function editAction() {}
 </script>
 
 <template>
@@ -33,10 +24,7 @@ function editAction() {}
         :key="index"
       >
         <figure>
-          <img
-            class="h-60"
-            :src="'../src/assets/images/' + item.image + '.jpg'"
-          />
+          <img class="h-60" :src="item.image" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{ item.name }}</h2>
@@ -45,7 +33,7 @@ function editAction() {}
             <RouterLink
               :to="{
                 name: 'editor',
-                params: { id: item.image },
+                params: { id: item.imageName },
               }"
               class="btn btn-primary"
               >Use template</RouterLink

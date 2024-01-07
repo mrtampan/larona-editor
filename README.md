@@ -1,6 +1,6 @@
 # Larona Editor
 
-Simple photo editor using fabricjs, vuejs, vite, daisyui, tailwind
+Simple meme editor using fabricjs, vuejs, vite, daisyui, tailwind
 
 ## Recommended IDE Setup
 
