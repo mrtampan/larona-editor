@@ -1,6 +1,11 @@
 # Larona Editor
 
-Simple meme editor using fabricjs, vuejs, vite, daisyui, tailwind
+Meme editor using fabricjs, vuejs, vite, daisyui, tailwind
+
+## Demo
+https://github.com/mrtampan/larona-editor/assets/33930946/fc5f5a8b-b193-42c8-ad3f-0aa23a89e0f4
+
+
 
 ## Recommended IDE Setup
 
