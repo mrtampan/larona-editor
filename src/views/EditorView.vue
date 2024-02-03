@@ -3,6 +3,12 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { fabric } from 'fabric';
 import Modal from './Modal.vue';
+import {
+  PaintBrushIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  ArrowDownIcon,
+} from '@heroicons/vue/16/solid';
 
 const route = useRoute();
 const canvas = ref(null);
@@ -106,31 +112,37 @@ function download() {
   <div class="flex flex-row">
     <div class="bg-neutral p-4 w-60 space-y-1 flex flex-col">
       <div class="text-white text-xl">Tools</div>
-      <div
-        class="text-white btn btn-xs"
-        :class="{
-          'btn-error': brushObj.active == true,
-          'btn-info': brushObj.active == false,
-        }"
-        @click="showBrush"
-      >
-        Brush
-      </div>
-      <div
-        class="text-white btn btn-xs btn-info"
-        :class="{
-          'btn-error': textObj.active == true,
-          'btn-info': textObj.active == false,
-        }"
-        @click="showText"
-      >
-        Text
-      </div>
-      <div class="text-white btn btn-xs btn-info" @click="deleteObject">
-        Delete
-      </div>
-      <div class="text-white btn btn-xs btn-info" @click="download">
-        Download
+      <div class="grid grid-cols-4 gap-2 mt-2">
+        <div
+          class="text-white flex flex-col"
+          :class="{
+            'text-red-500': brushObj.active == true,
+            'text-white': brushObj.active == false,
+          }"
+          @click="showBrush"
+        >
+          <PaintBrushIcon class="h-6 w-6 mx-auto" />
+          <span class="text-center text-xs">Brush</span>
+        </div>
+        <div
+          class="text-white flex flex-col"
+          :class="{
+            'text-red-500': textObj.active == true,
+            'text-white': textObj.active == false,
+          }"
+          @click="showText"
+        >
+          <PencilSquareIcon class="h-6 w-6 mx-auto" />
+          <span class="text-center text-xs">Text</span>
+        </div>
+        <div class="text-white flex flex-col" @click="deleteObject">
+          <TrashIcon class="h-6 w-6 mx-auto" />
+          <span class="text-center text-xs">Delete</span>
+        </div>
+        <div class="text-white flex flex-col" @click="download">
+          <ArrowDownIcon class="h-6 w-6 mx-auto" />
+          <span class="text-center text-xs">Download</span>
+        </div>
       </div>
     </div>
     <div align="center" class="mx-auto pb-4">
